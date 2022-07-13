@@ -302,6 +302,7 @@ func (a *appGenerator) makeCodegenApp() (GenApp, error) {
 	sort.Sort(genModels)
 
 	log.Printf("planning operations (found: %d)", len(a.Operations))
+	pristineDoc := a.SpecDoc.Pristine()
 
 	genOps := make(GenOperations, 0, len(a.Operations))
 	for operationName, opp := range a.Operations {
@@ -316,6 +317,7 @@ func (a *appGenerator) makeCodegenApp() (GenApp, error) {
 			Imports:          imports,
 			DefaultScheme:    a.DefaultScheme,
 			Doc:              a.SpecDoc,
+			PristineDoc:      pristineDoc,
 			Analyzed:         a.Analyzed,
 			BasePath:         a.SpecDoc.BasePath(),
 			GenOpts:          a.GenOpts,
